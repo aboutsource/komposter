@@ -1,0 +1,5 @@
+#!/bin/sh
+test -z "$HOSTUID" && HOSTUID=1000 # sane default
+echo "date.timezone = 'Europe/Berlin'" >> /usr/local/etc/php/php.ini
+useradd -d /tmp/hostuser -m -U -u $HOSTUID hostuser
+su -c "composer $@" hostuser
