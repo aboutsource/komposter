@@ -1,0 +1,14 @@
+version: '3'
+services:
+  komposter:
+    image: quay.io/aboutsource/wordpress:7.0
+    volumes:
+    - $PWD:/var/www/html
+    - ../bin:/opt/bin
+    - $SSH_AUTH_SOCK:/ssh-agent # Forward local machine SSH key to docker
+    - $HOME/.ssh/known_hosts:/etc/ssh/ssh_known_hosts
+    environment:
+    - PATH=/opt/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    - SSH_AUTH_SOCK=/ssh-agent
+    - HOSTUID
+    entrypoint: komposter
